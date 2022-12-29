@@ -33,6 +33,14 @@
       <version>2.0.3</version>
     </dependency>
     
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+    </dependency>
+    
+    
   </dependencies>
   
   <build>
@@ -84,4 +92,21 @@
       </plugins>
     </pluginManagement>
   </build>
+  
+  
+  <dependencyManagement>
+    
+    
+    <dependencies>
+      
+      
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.3</version>
+      </dependency>
+      
+    </dependencies>
+    
+  </dependencyManagement>
 </project>
