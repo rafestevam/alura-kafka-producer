@@ -1,6 +1,8 @@
 package br.com.alura.ecommerce;
 
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public class EmailService {
@@ -13,7 +15,13 @@ public class EmailService {
             emailService::parse, 
             Email.class,
             new HashMap<String, String>())){
-            service.run();
+            try {
+                service.run();
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

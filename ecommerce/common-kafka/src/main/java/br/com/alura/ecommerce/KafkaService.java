@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -31,13 +32,19 @@ public class KafkaService<T> implements Closeable {
         this.consumer = new KafkaConsumer<>(properties(type, groupID, extraProps));
     }
 
-    public void run() {
+    public void run() throws ExecutionException, InterruptedException {
         while(true){
             var records = consumer.poll(Duration.ofMillis(100));
             if(!records.isEmpty()){
                 System.out.println("#" + records.count() + " records found...");
                 for(var record : records) {
-                    parse.consume(record);
+                    try {
+                        parse.consume(record);
+                    } catch (Exception e) {
+                        //Tratamento de qualquer tipo de exceção
+                        //O objetivo é pegar a proxima mensagem da fila e tratar
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }

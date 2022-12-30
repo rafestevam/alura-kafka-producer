@@ -1,6 +1,7 @@
 package br.com.alura.ecommerce;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -18,7 +19,13 @@ public class LogService {
             String.class,
             Map.of(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName())
             )){
-            service.run();
+            try {
+                service.run();
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
