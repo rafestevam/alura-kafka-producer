@@ -52,7 +52,7 @@ public class KafkaService<T> implements Closeable {
 
     private Properties properties(Class<T> type, String groupID, Map<String, String> extraProps) {
         var properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "vadhgcs61942.hycloud.softwareag.com:9092");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "vadhgcs62328.hycloud.softwareag.com:11001");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         //Desserealizando com um Desserializador customizado herdado de GSONBuilder
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, GsonDeserializer.class.getName());
